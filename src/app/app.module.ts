@@ -8,10 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
-  declarations: [
+  declarations: [ //Componentes(component.ts) ou modulos - Paginas que carregam ao iniciar o app
     MyApp
   ],
-  imports: [
+  imports: [ //modulos
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
