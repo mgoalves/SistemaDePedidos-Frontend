@@ -3,6 +3,7 @@
 
   <img src="assets/imgs/telaInicial.png" alt="logo"/>
 
+  <!-- Formulário - BEGIN -->
   <form>
     <ion-item>
       <ion-label stacked>Email</ion-label>
@@ -11,11 +12,12 @@
 
     <ion-item>
       <ion-label stacked>Senha</ion-label>
-      <ion-input  [(ngModel)]="credenciais.password" name="password" type="password"></ion-input>
+      <ion-input  [(ngModel)]="credenciais.senha" name="password" type="password"></ion-input>
     </ion-item>
 
     <button ion-button block (click)="login()">Entrar</button>
   </form>
+  <!-- Formulário - END -->
 
   <button ion-button block outline>Registrar</button>
 

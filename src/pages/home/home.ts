@@ -2,6 +2,7 @@ import { CredeciaisDTO } from './../../models/credenciais.dto';
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { AuthService } from '../../services/AuthService';
 
 @IonicPage()
 @Component({
@@ -14,11 +15,14 @@ export class HomePage {
   credenciais : CredeciaisDTO = {
 
     email: "",
-    password: ""
+    senha: ""
   };
 
   //Construtor ------------------------------------------------------------
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController, 
+    public menu: MenuController, 
+    public auth: AuthService) {
   }
 
 
@@ -39,8 +43,12 @@ export class HomePage {
   // Método de login - BTN Entrar ---
   public login(){
 
-    console.log(this.credenciais);
+    this.auth.authenticate(this.credenciais)
+      .subscribe(reponse => {
 
-    this.navCtrl.setRoot('CategoriasPage');
+        console.log(reponse.headers.get('Authorization'))
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {});    
   }
 }
