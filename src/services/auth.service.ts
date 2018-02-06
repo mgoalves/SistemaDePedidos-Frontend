@@ -12,6 +12,9 @@ export class AuthService {
     }
 
 
+    // Métodos --------------------------------------------------------------------
+
+    // Faz requisição ao endpoint de login passando as credenciais ----------------
     authenticate(credenciais : CredeciaisDTO) {
 
         return this.httpClient.post(
@@ -24,6 +27,7 @@ export class AuthService {
         );
     }
 
+    // Quando authenticar com sucesso, salvar token no localStorage-----------------
     sucessfulLogin(headerAuthorization : string) {
 
         let tokenSub = headerAuthorization.substring(7);
@@ -35,6 +39,7 @@ export class AuthService {
         this.storage.setLocalUser(user);
     }
 
+    // Remover token do localStorage -----------------------------------------------
     logout() {
 
         this.storage.setLocalUser(null);
