@@ -15,9 +15,10 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    // Menu com as respectivas paginas
     this.pages = [
-      { title: 'Home', component: 'HomePage' }
+      { title: 'Profile', component: 'ProfilePage' },
+      { title: 'Categorias', component: 'CategoriasPage' }
     ];
 
   }
