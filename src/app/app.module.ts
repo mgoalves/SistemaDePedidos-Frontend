@@ -1,3 +1,4 @@
+import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
 import { StorageService } from './../services/storage.service';
 import { ErrorInterceptorProvider } from './../interceptors/erroInterceptor';
@@ -32,7 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CategoriaService,
     ErrorInterceptorProvider,
     AuthService,
-    StorageService
+    StorageService,
+    ClienteService
   ]
 })
 export class AppModule {}
