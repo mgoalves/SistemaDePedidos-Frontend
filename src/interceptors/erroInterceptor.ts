@@ -2,12 +2,15 @@ import { StorageService } from './../services/storage.service';
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx'; // IMPORTANTE: IMPORT ATUALIZADO
+import { AlertController } from 'ionic-angular';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
+ 
+
     //Construtor -----------------------------------
-    constructor(public storage: StorageService){
+    constructor(public storage: StorageService, public alertCtrl: AlertController){
     }
 
 
@@ -32,9 +35,16 @@ export class ErrorInterceptor implements HttpInterceptor {
             // Tratar erros de códigos especificos
             switch(errorObj.status){
 
+                case 401:
+                this.handle401();
+                break;
+
                 case 403:
                 this.handle403();
-                break;
+                break; 
+
+                default:
+                this.handleDefaultError(errorObj);
             }
 
             return Observable.throw(errorObj);
@@ -47,6 +57,40 @@ export class ErrorInterceptor implements HttpInterceptor {
     handle403(){
 
         this.storage.setLocalUser(null);
+    }
+
+    //Trata erros 401 - Exibe alerta com falha na autenticação -
+    handle401(){
+
+        let alert = this.alertCtrl.create({
+            title: 'Falha ao autenticar',
+            message: 'Email ou senha inválidos',
+            enableBackdropDismiss: true,
+            buttons: [ //Array de buttons
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+
+        alert.present();
+    }
+
+    //Trata erros que não foram validados ---------------------
+    handleDefaultError(errorObj: any){
+
+        let alert = this.alertCtrl.create({
+            title: errorObj.status + ': '+ errorObj.error,
+            message: errorObj.message,
+            enableBackdropDismiss: true,
+            buttons: [ //Array de buttons
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+
+        alert.present();
     }
 }
 
