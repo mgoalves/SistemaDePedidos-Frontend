@@ -8,16 +8,29 @@
 
 
 <ion-content padding>
-    <form (ngSubmit)="signupUser(); $event.preventDefault()">
+    <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+
+        <!--Dados de login -->
         <ion-item>
           <ion-label stacked>Nome*</ion-label>
-          <ion-input name="nome" type="text"></ion-input>
+          <ion-input formControlName="nome" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>CPF ou CNPJ</ion-label>
+            <ion-input formControlName="cpfOuCnpj" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Email*</ion-label>
-          <ion-input name="email" type="text"></ion-input>
+          <ion-input formControlName="email" type="email"></ion-input>
         </ion-item>
-        <ion-list radio-group name="tipo">
+        <ion-item>
+          <ion-label stacked>Senha*</ion-label>
+          <ion-input formControlName="senha" type="password"></ion-input>
+        </ion-item> 
+        <br/>
+
+        <!-- Dados pessoais -->
+        <ion-list radio-group formControlName="tipo">
           <ion-list-header>
             Tipo de cliente
           </ion-list-header>
@@ -30,22 +43,18 @@
             <ion-radio value="2"></ion-radio>
           </ion-item>
         </ion-list>
-    
-        <ion-item>
-          <ion-label stacked>CPF ou CNPJ</ion-label>
-          <ion-input name="cpfOuCnpj" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Senha*</ion-label>
-          <ion-input name="senha" type="password"></ion-input>
-        </ion-item> 
+
+        <!-- Endereço -->
+        <ion-list-header>
+            Endereço
+        </ion-list-header>
         <ion-item>
           <ion-label stacked>Logradouro*</ion-label>
-          <ion-input name="logradouro" type="text"></ion-input>
+          <ion-input formControlName="logradouro" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Número*</ion-label>
-          <ion-input name="numero" type="text"></ion-input>
+          <ion-input formControlName="numero" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Complemento</ion-label>
@@ -53,35 +62,35 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>Bairro</ion-label>
-          <ion-input name="bairro" type="text"></ion-input>
+          <ion-input formControlName="bairro" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>CEP*</ion-label>
-          <ion-input name="cep" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Telefone 1*</ion-label>
-          <ion-input name="telefone1" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Telefone 2</ion-label>
-          <ion-input name="telefone2" type="text"></ion-input>
+          <ion-input formControlName="cep" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Estado*</ion-label>
-          <ion-select name="estadoId" (ionChange)="updateCidades()">
+          <ion-select formControlName="estadoId" (ionChange)="updateCidades()">
             <ion-option value="1">Minas Gerais</ion-option>
             <ion-option value="2">São Paulo</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label stacked>Cidade*</ion-label>
-          <ion-select name="cidadeId">
+          <ion-select formControlName="cidadeId">
             <ion-option value="1">Santos</ion-option>
             <ion-option value="2">Belo Horizonte</ion-option>
             <ion-option value="2">Campinas</ion-option>
           </ion-select>
         </ion-item>
+        <ion-item>
+            <ion-label stacked>Telefone 1*</ion-label>
+            <ion-input formControlName="telefone1" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Telefone 2</ion-label>
+            <ion-input formControlName="telefone2" type="text"></ion-input>
+          </ion-item>
         <button ion-button block type="submit">Criar conta</button>
       </form>
 </ion-content>
