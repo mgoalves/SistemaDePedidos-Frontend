@@ -34,6 +34,19 @@ export class HomePage {
     this.menu.swipeEnable(false);
   }
 
+  // Quando entrar na página ---------
+  ionViewDidEnter(){
+   
+    this.auth.refreshtoken()
+    .subscribe(reponse => {
+
+      this.auth.sucessfulLogin(reponse.headers.get('Authorization'));
+      this.navCtrl.setRoot('CategoriasPage');
+    },
+    error => {});    
+  }
+  
+
   // Quando sair da página ----------
   ionViewDidLeave(){
 

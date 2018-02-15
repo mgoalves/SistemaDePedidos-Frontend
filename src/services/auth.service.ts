@@ -33,6 +33,19 @@ export class AuthService {
         );
     }
 
+    // Faz requisição ao endpoint de refesh token ---------------------------------
+    refreshtoken() {
+
+            return this.httpClient.post(
+                `${API_CONFIG.baseUrl}/auth/refresh_token`, 
+                {},
+                {
+                    observe : 'response',
+                    responseType : 'text' //Como retorna corpo vazio - Evitar erro de parse JSON
+                }
+            );
+        }
+
     // Quando authenticar com sucesso, salvar token no localStorage-----------------
     sucessfulLogin(headerAuthorization : string) {
 
