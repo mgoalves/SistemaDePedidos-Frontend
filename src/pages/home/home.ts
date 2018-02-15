@@ -54,7 +54,7 @@ export class HomePage {
   }
 
   // Método de login - BTN Entrar ---
-  public login(){
+  login(){
 
     this.auth.authenticate(this.credenciais)
       .subscribe(reponse => {
@@ -64,4 +64,10 @@ export class HomePage {
       },
       error => {});    
   }
+
+    // Método de cadastrar - BTN Registrar ---
+    signup(){
+
+      this.navCtrl.push('SignupPage');
+    }
 }
