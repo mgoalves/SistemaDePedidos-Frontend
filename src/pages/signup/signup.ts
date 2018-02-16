@@ -1,3 +1,5 @@
+import { EstadoService } from './../../services/domain/estado.service';
+import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,7 +19,9 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    public cidadeService: CidadeService,
+    public estadoService: EstadoService) {
 
 
       this.formGroup = this.formBuilder.group({
