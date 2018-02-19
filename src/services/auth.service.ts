@@ -44,7 +44,7 @@ export class AuthService {
                     responseType : 'text' //Como retorna corpo vazio - Evitar erro de parse JSON
                 }
             );
-        }
+    }
 
     // Quando authenticar com sucesso, salvar token no localStorage-----------------
     sucessfulLogin(headerAuthorization : string) {

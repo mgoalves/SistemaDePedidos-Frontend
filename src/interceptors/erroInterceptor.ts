@@ -1,3 +1,4 @@
+import { FieldMessage } from './../models/fieldmessage.dto';
 import { StorageService } from './../services/storage.service';
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -8,6 +9,8 @@ import { AlertController } from 'ionic-angular';
 export class ErrorInterceptor implements HttpInterceptor {
 
  
+
+
 
     //Construtor -----------------------------------
     constructor(public storage: StorageService, public alertCtrl: AlertController){
@@ -43,6 +46,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.handle403();
                 break; 
 
+                case 422:
+                this.handle422(errorObj);
+                break;
+
                 default:
                 this.handleDefaultError(errorObj);
             }
@@ -74,6 +81,31 @@ export class ErrorInterceptor implements HttpInterceptor {
         });
 
         alert.present();
+    }
+
+     //Trata erros 422 - Falha na validação.
+    handle422(errorObj: any){
+
+        let alert = this.alertCtrl.create({
+            title: 'Validação',
+            message: this.listErros(errorObj.erros),
+            enableBackdropDismiss: false,
+            buttons: [ //Array de buttons
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+
+        alert.present();
+    }
+    listErros(errors: FieldMessage[]): string {
+        let s : string = '';
+
+        for (var i=0; i<errors.length; i++) {
+            s = s + '<p><strong>' + errors[i].fieldErro + "</strong>: " + errors[i].erro + '</p></br>';
+        }
+        return s;
     }
 
     //Trata erros que não foram validados ---------------------

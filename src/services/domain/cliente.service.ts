@@ -33,4 +33,17 @@ export class ClienteService {
             {responseType : 'blob'}
         );
     }
+
+    // Salva novo cliente - POST
+    save(cliente : ClienteDTO) {
+
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes`, 
+            cliente,
+                {
+                    observe : 'response',
+                    responseType : 'text' //Como retorna corpo vazio - Evitar erro de parse JSON
+                }
+        );
+    }
 }
