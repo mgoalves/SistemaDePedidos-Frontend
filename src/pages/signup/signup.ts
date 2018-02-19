@@ -1,3 +1,5 @@
+import { CidadeDTO } from './../../models/cidade.dto';
+import { EstadoDTO } from './../../models/estado.dto.';
 import { EstadoService } from './../../services/domain/estado.service';
 import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
@@ -13,6 +15,8 @@ export class SignupPage {
 
   //Atributos ----------------
   formGroup: FormGroup;
+  estados: EstadoDTO[];
+  cidades: CidadeDTO[];
 
 
   //Construtor ----------------
@@ -54,6 +58,39 @@ export class SignupPage {
     console.log('Enviou o form');
   }
 
+
+  //Atualiza cidade após estado escolhido --
   updateCidades(){
+
+    let estadoId = this.formGroup.value.estadoId;
+
+    this.cidadeService.findAll(estadoId)
+      .subscribe(
+        response => {
+
+          this.cidades = response;
+          this.formGroup.controls.cidadeId.setValue(null);
+        },
+        error => {
+
+        }
+      )
+  }
+
+  //Quando carregar a página -------
+  ionViewDidLoad(){
+   
+    this.estadoService.findAll()
+      .subscribe(
+        response => {
+
+            this.estados = response;
+            this.formGroup.controls.estadoId.setValue(this.estados[0].id);
+            this.updateCidades();
+
+          },
+          error => {
+          }
+      )
   }
 }
