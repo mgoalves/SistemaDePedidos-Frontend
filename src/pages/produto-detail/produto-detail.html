@@ -1,0 +1,30 @@
+<!-- HEADER - BEGIN -->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalhes do Produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<!-- HEADER - END -->
+
+<!-- BODY - BEGIN -->
+<ion-content padding>
+
+  <ion-card>
+    <img class="circle" [src]="produto?.imageUrl || 'assets/imgs/prod.jpg'"/>
+    <ion-card-content>
+      <ion-card-title text-center>
+        {{ produto?.nome }}
+      </ion-card-title>
+      <p text-center>
+        {{ produto?.preco | currency}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block outline>Adicionar ao carrinho</button>
+</ion-content>
+<!-- BODY - END -->
