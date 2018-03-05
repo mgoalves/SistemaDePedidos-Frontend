@@ -1,3 +1,4 @@
+import { ProdutoDTO } from './../../models/produto.dto';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
@@ -24,5 +25,22 @@ export class ProdutoService {
             url, 
             {responseType : 'blob'}
         );
+    }
+
+    //Buscar imagem do produto na S3  --------------------------------------------
+    getImageFromBucket(id : string) : Observable<any>{
+
+        let url = `${API_CONFIG.bucketUrl}/prod${id}.jpg`;
+
+        return this.http.get(
+            url, 
+            {responseType : 'blob'}
+        );
+    }
+
+    //retorna o produto pelo seu ID -----------------------------------------------
+    public findById(produtoID : string) : Observable<ProdutoDTO>{
+
+        return this.http.get<ProdutoDTO>(`${API_CONFIG.baseUrl}/produtos/${produtoID}`);
     }
 }

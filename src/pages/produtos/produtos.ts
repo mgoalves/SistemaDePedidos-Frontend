@@ -58,9 +58,9 @@ export class ProdutosPage {
   }
 
   //Redirecionar para página de detalhes -------------
-  produtoDetails(){
+  produtoDetails(produtoID : string){
 
-    this.navCtrl.push('ProdutoDetailPage');
+    this.navCtrl.push('ProdutoDetailPage', {produtoID: produtoID});
   }
 
 }
