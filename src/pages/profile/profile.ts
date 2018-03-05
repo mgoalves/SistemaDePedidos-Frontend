@@ -52,7 +52,7 @@ export class ProfilePage {
     }
   }
 
-  // Buscar imagem no bucket
+  // Buscar imagem no bucket ---------------------------
   getImage() {
 
     this.clienteService.getImageFromBucket(this.cliente.id)
