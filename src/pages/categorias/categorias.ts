@@ -11,17 +11,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CategoriasPage {
 
+  //Atributos --------------------------------------------------
   bucketUrl: string = API_CONFIG.bucketUrl;
   categorias: CategoriaDTO[];
 
+  //Construtor ------------------------------------------------
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public categoriaService: CategoriaService) {
   }
 
+  //Métodos auxiliares -------------------------------------------
 
-
+  //Quando carregar a page ------------
   ionViewDidLoad() {
 
     this.categoriaService.findAll()
@@ -35,8 +38,8 @@ export class CategoriasPage {
     console.log();
   }
 
-  showProdutos(){
-    this.navCtrl.push('ProdutosPage');
+  //Método que chama os produtos desta cat ---
+  showProdutos(categoriaID : string){
+    this.navCtrl.push('ProdutosPage', {categoriaID: categoriaID});
   }
-
 }
