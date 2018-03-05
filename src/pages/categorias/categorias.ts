@@ -35,4 +35,8 @@ export class CategoriasPage {
     console.log();
   }
 
+  showProdutos(){
+    this.navCtrl.push('ProdutosPage');
+  }
+
 }
